@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<title>数独乐园</title>
+<meta name="description" content="从 4×4 到 9×9，给一年级小朋友的数独闯关游戏">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="数独乐园">
+<meta name="theme-color" content="#6C7BF2">
+<meta name="format-detection" content="telephone=no">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app-shell">
+
+  <section id="mapView" class="view active">
+    <header class="top-bar">
+      <div class="brand">
+        <img class="brand-icon" src="icons/icon-192.png" alt="数独乐园">
+        <div class="brand-text"><h1>数独乐园</h1><p>从 4×4 开始，一起闯关吧</p></div>
+      </div>
+      <div class="top-right">
+        <div class="star-badge"><span class="star-ico">★</span><b id="totalStars">0</b></div>
+        <button class="round-btn" id="mapSettings" aria-label="设置">⚙</button>
+      </div>
+    </header>
+    <div class="map-scroll">
+      <div class="map-intro">
+        <h2>今天想玩哪一关？</h2>
+        <p>一关一关慢慢来，完成后可以收集小星星</p>
+      </div>
+      <div id="levelGrid" class="level-grid"></div>
+      <div class="map-foot" id="mapFoot"></div>
+    </div>
+  </section>
+
+  <section id="gameView" class="view">
+    <header class="top-bar game-top">
+      <button class="round-btn back-btn" id="backBtn" aria-label="返回关卡地图">‹</button>
+      <div class="game-title"><h1 id="levelTitle">第 1 关</h1><p id="levelDesc">找出少了哪个数字</p></div>
+      <div class="top-right">
+        <div class="size-badge" id="sizeBadge">4×4</div>
+        <button class="round-btn" id="gameSettings" aria-label="设置">⚙</button>
+      </div>
+    </header>
+    <div class="game-body">
+      <div class="board-area">
+        <div class="board-frame"><div id="board" class="board"></div></div>
+        <div class="cheer" id="cheer"></div>
+      </div>
+      <div class="control-area">
+        <div class="pad-head"><span>点数字，填进格子</span><b id="progressText">0 / 0</b></div>
+        <div id="numPad" class="num-pad"></div>
+        <div class="tools">
+          <button class="tool-btn" id="eraseBtn"><span class="tool-ico">⌫</span>擦掉</button>
+          <button class="tool-btn" id="hintBtn"><span class="tool-ico">✦</span>小提示</button>
+          <button class="tool-btn" id="restartBtn"><span class="tool-ico">↻</span>重来</button>
+        </div>
+        <div class="tip-line" id="tipLine">先看一行里少了哪个数字吧</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-shade" data-close="1"></div>
+  <div class="modal-card">
+    <button class="modal-x" data-close="1" aria-label="关闭">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+<canvas id="confetti" class="confetti"></canvas>
+
+<script src="app.js"></script>
+<script>
+if ('serviceWorker' in navigator && location.protocol.indexOf('http') === 0) {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('./sw.js').catch(function () {});
+  });
+}
+</script>
+</body>
+</html>
